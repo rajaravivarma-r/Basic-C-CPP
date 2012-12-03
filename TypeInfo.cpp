@@ -9,7 +9,7 @@ class Car
     string x;
   public:
     Car() {
-      x = "hellooooo";
+      x = "Class Car";
     }
     void print()
     {
@@ -22,7 +22,7 @@ class Bike
     string x;
   public:
     Bike() {
-      x = "hiiiiiiii";
+      x = "Class Bike";
     }
     void print()
     {
@@ -37,5 +37,4 @@ int main()
   b.print();
   cout << typeid(Car).name() << endl;
   cout << typeid(b).name() << endl;
-  cout << typeid(typeid(c)).name() << endl;
 }
