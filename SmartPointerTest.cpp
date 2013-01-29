@@ -4,22 +4,21 @@
 using namespace std;
 class SeeWhat
 {
+
 public:
 SeeWhat()
-{ cout << "See what constructor\n"; }
+{ cout << "See what constructor called\n"; }
 ~SeeWhat()
-{ cout << "See what destructor\n"; }
+{ cout << "See what destructor called\n"; }
+
 };
 
 class PointerTest
 {
-
 public:
 
-PointerTest()
+PointerTest() : seeWhat(unique_ptr<SeeWhat>((new SeeWhat())))
 {
-SeeWhat *tmp = new SeeWhat();
-seeWhat = move(tmp);
 cout << "PointerTest class constructor called\n";
 }
 
@@ -30,6 +29,7 @@ cout << "PointerTest class destructor called\n";
 
 private:
 unique_ptr<SeeWhat> seeWhat;
+
 };
 
 int main()
