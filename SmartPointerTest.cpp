@@ -2,14 +2,25 @@
 #include <memory>
 
 using namespace std;
-class SeeWhat
+class UniquePtrClassMember
 {
 
 public:
-SeeWhat()
-{ cout << "See what constructor called\n"; }
-~SeeWhat()
-{ cout << "See what destructor called\n"; }
+UniquePtrClassMember()
+{ cout << "UniquePtrClassMember constructor called\n"; }
+~UniquePtrClassMember()
+{ cout << "UniquePtrClassMember destructor called\n"; }
+
+};
+
+class RawPointerClassMember
+{
+
+public:
+RawPointerClassMember()
+{ cout << "RawPointerClassMember constructor called \n"; }
+~RawPointerClassMember()
+{ cout << "RawPointerClassMember destructor called \n"; }
 
 };
 
@@ -17,7 +28,8 @@ class PointerTest
 {
 public:
 
-PointerTest() : seeWhat(unique_ptr<SeeWhat>((new SeeWhat())))
+PointerTest() : uniquePtr(unique_ptr<UniquePtrClassMember>((new UniquePtrClassMember()))),
+				rawPointer(new RawPointerClassMember())
 {
 cout << "PointerTest class constructor called\n";
 }
@@ -28,12 +40,20 @@ cout << "PointerTest class destructor called\n";
 }
 
 private:
-unique_ptr<SeeWhat> seeWhat;
+unique_ptr<UniquePtrClassMember> uniquePtr;
+RawPointerClassMember *rawPointer;
 
 };
 
+void testFunction()
+{
+cout << "In testFunction\n";
+unique_ptr<PointerTest> testPointer(new PointerTest());
+cout << "Out of testFunction\n";
+}
+
 int main()
 {
-unique_ptr<PointerTest> testPointer(new PointerTest());
+testFunction();
 return 0;
 }
